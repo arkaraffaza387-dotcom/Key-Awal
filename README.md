@@ -100,7 +100,6 @@ body::before {
 .alert-info { background: rgba(100,150,255,0.12); border: 1px solid rgba(100,150,255,0.4); color: #a0c0ff; }
 .alert-error { background: rgba(255,50,50,0.12); border: 1px solid rgba(255,50,50,0.4); color: #ff9999; }
 .alert-success { background: rgba(50,255,100,0.12); border: 1px solid rgba(50,255,100,0.4); color: #99ff99; }
-.alert-warn { background: rgba(255,180,50,0.12); border: 1px solid rgba(255,180,50,0.4); color: #ffcc88; }
 
 .btn {
     padding: 15px 24px;
@@ -143,36 +142,6 @@ body::before {
 }
 .btn-secondary:hover { background: rgba(255, 215, 0, 0.15); }
 
-.input-group { margin-bottom: 16px; }
-.input-label {
-    color: #ffd700;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    display: block;
-}
-.input-field {
-    width: 100%;
-    padding: 16px 20px;
-    background: #0d0202;
-    border: 2px solid rgba(184, 134, 11, 0.5);
-    border-radius: 16px;
-    color: #ffed4a;
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    outline: none;
-}
-.input-field:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-}
-
-/* KEY DISPLAY */
 .key-display {
     background: linear-gradient(145deg, #1a0505 0%, #0d0202 100%);
     border: 2px solid #ffd700;
@@ -226,7 +195,6 @@ body::before {
     border: 1px solid #8b6914;
 }
 
-/* TIMER */
 .timer-container {
     margin-top: 22px;
     padding: 18px;
@@ -273,25 +241,12 @@ body::before {
     text-shadow: 0 0 40px rgba(255, 68, 68, 0.8);
 }
 
-/* ACTIONS */
 .actions {
     display: flex;
     gap: 10px;
     margin-top: 16px;
 }
 .actions .btn { flex: 1; margin-top: 0; }
-
-.badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.badge-expired { background: rgba(255,50,50,0.15); color: #ff6666; border: 1px solid #ff4444; }
-.badge-active { background: rgba(0,255,136,0.15); color: #00ff88; border: 1px solid #00ff88; }
 
 .history {
     margin-top: 24px;
@@ -328,65 +283,6 @@ body::before {
     color: #886666;
     letter-spacing: 1px;
 }
-
-.limit-badge {
-    text-align: center;
-    font-size: 0.72rem;
-    color: #cc9999;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-}
-.limit-badge strong { color: #ffd700; }
-.limit-badge.warn strong { color: #ff6666; }
-
-/* COUNTDOWN RESET */
-.reset-info {
-    text-align: center;
-    padding: 10px 14px;
-    margin-bottom: 14px;
-    background: rgba(0,0,0,0.3);
-    border: 1px dashed rgba(184, 134, 11, 0.5);
-    border-radius: 12px;
-    font-size: 0.72rem;
-    color: #cc9999;
-    letter-spacing: 1px;
-    line-height: 1.6;
-}
-.reset-info .reset-time {
-    font-family: 'Orbitron', monospace;
-    font-size: 1rem;
-    color: #ffd700;
-    font-weight: 700;
-    letter-spacing: 2px;
-    display: block;
-    margin-top: 4px;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-.reset-info .reset-time.urgent { color: #00ff88; text-shadow: 0 0 20px rgba(0,255,136,0.8); }
-
-/* LIMIT EXHAUSTED OVERLAY */
-.limit-exhausted {
-    background: rgba(255, 68, 68, 0.1);
-    border: 1px solid rgba(255, 68, 68, 0.4);
-    border-radius: 16px;
-    padding: 16px;
-    text-align: center;
-    margin-bottom: 14px;
-    display: none;
-}
-.limit-exhausted.show { display: block; animation: fadeIn 0.4s ease; }
-.limit-exhausted h3 {
-    color: #ff6666;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-}
-.limit-exhausted p {
-    color: #cc9999;
-    font-size: 0.8rem;
-    line-height: 1.6;
-}
 </style>
 </head>
 <body>
@@ -396,24 +292,7 @@ body::before {
     <p class="subtitle">Buat key akses kamu sendiri</p>
 
     <div class="alert alert-info" id="infoAlert">
-        <strong>ℹ️ Info:</strong> Key berlaku <strong>3 menit</strong>. Limit <strong>10 key</strong> per sesi, reset jam <strong>10:00</strong> & <strong>20:00</strong>.
-    </div>
-
-    <!-- LIMIT BADGE -->
-    <div class="limit-badge" id="limitBadge">
-        Limit Sesi: <strong id="usedCount">0</strong> / <strong>10</strong> key
-    </div>
-
-    <!-- RESET COUNTDOWN -->
-    <div class="reset-info" id="resetInfo">
-        🔄 Reset limit berikutnya dalam:
-        <span class="reset-time" id="resetCountdown">--:--:--</span>
-    </div>
-
-    <!-- LIMIT EXHAUSTED -->
-    <div class="limit-exhausted" id="limitExhausted">
-        <h3>⚠️ LIMIT HABIS</h3>
-        <p>Kamu sudah membuat 10 key. Tunggu reset berikutnya jam <strong id="nextResetTime">10:00</strong>.</p>
+        <strong>ℹ️ Info:</strong> Key berlaku <strong>3 menit</strong> sejak dibuat. Setelah expired, buat key baru.
     </div>
 
     <div class="alert alert-error" id="errorAlert"></div>
@@ -469,104 +348,6 @@ const COLLECTION = "keys";
 const KEY_PREFIX = "AzferFree_";
 const KEY_RANDOM_LENGTH = 23;
 const KEY_DURATION_MS = 3 * 60 * 1000; // 3 menit
-const MAX_KEYS_PER_SESSION = 10;
-
-// ================================================================
-// KONFIGURASI RESET (jam 10:00 & 20:00)
-// ================================================================
-const RESET_HOURS = [10, 20]; // Reset jam 10 pagi & 8 malam
-
-/**
- * Hitung waktu reset berikutnya
- * @returns {Date} Waktu reset berikutnya
- */
-function getNextResetTime() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMin = now.getMinutes();
-    
-    // Cari reset berikutnya hari ini
-    for (const hour of RESET_HOURS) {
-        if (currentHour < hour || (currentHour === hour && currentMin === 0)) {
-            const reset = new Date(now);
-            reset.setHours(hour, 0, 0, 0);
-            if (reset > now) return reset;
-        }
-    }
-    
-    // Kalau sudah lewat semua reset hari ini, ambil reset pertama besok
-    const reset = new Date(now);
-    reset.setDate(reset.getDate() + 1);
-    reset.setHours(RESET_HOURS[0], 0, 0, 0);
-    return reset;
-}
-
-/**
- * Dapatkan ID sesi unik berdasarkan jam reset terakhir
- * Format: "YYYY-MM-DD-HH" (jam reset terakhir)
- */
-function getCurrentSessionId() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    
-    // Cari jam reset terakhir (yang sudah lewat)
-    let lastResetHour = -1;
-    for (const hour of RESET_HOURS) {
-        if (currentHour >= hour) lastResetHour = hour;
-    }
-    
-    // Kalau belum lewat reset hari ini, pakai reset terakhir kemarin
-    if (lastResetHour === -1) {
-        const yesterday = new Date(now);
-        yesterday.setDate(yesterday.getDate() - 1);
-        return `${yesterday.toISOString().slice(0,10)}-${RESET_HOURS[RESET_HOURS.length - 1]}`;
-    }
-    
-    return `${now.toISOString().slice(0,10)}-${lastResetHour}`;
-}
-
-/**
- * Ambil jumlah key yang sudah dibuat di sesi ini
- */
-function getSessionUsage() {
-    const sessionId = getCurrentSessionId();
-    const stored = localStorage.getItem('azfer_session_usage');
-    
-    if (!stored) return 0;
-    
-    try {
-        const data = JSON.parse(stored);
-        // Kalau session ID beda, berarti sudah reset → return 0
-        if (data.sessionId !== sessionId) return 0;
-        return data.count || 0;
-    } catch {
-        return 0;
-    }
-}
-
-/**
- * Increment usage counter untuk sesi ini
- */
-function incrementSessionUsage() {
-    const sessionId = getCurrentSessionId();
-    const currentCount = getSessionUsage();
-    
-    localStorage.setItem('azfer_session_usage', JSON.stringify({
-        sessionId: sessionId,
-        count: currentCount + 1,
-        lastUpdate: Date.now()
-    }));
-    
-    updateLimitBadge();
-}
-
-/**
- * Reset manual (untuk testing)
- */
-function resetSessionUsage() {
-    localStorage.removeItem('azfer_session_usage');
-    updateLimitBadge();
-}
 
 // ================================================================
 // STATE
@@ -575,36 +356,6 @@ let currentKey = null;
 let currentKeyId = null;
 let timerInterval = null;
 let keyStartTime = 0;
-let resetCountdownInterval = null;
-
-// ================================================================
-// API
-// ================================================================
-async function apiRequest(method, path, body=null) {
-    const url = DB_BASE + path;
-    const opts = {
-        method,
-        headers: {
-            'x-api-key': DB_API_KEY,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    };
-    if (body) opts.body = JSON.stringify(body);
-    const res = await fetch(url, opts);
-    const text = await res.text();
-    let data;
-    try { data = JSON.parse(text); } catch { data = text; }
-    console.log(`[API ${method}] ${path} → ${res.status}`, data);
-    return { ok: res.ok, status: res.status, data };
-}
-
-function parseArray(data) {
-    if (Array.isArray(data)) return data;
-    if (data && Array.isArray(data.data)) return data.data;
-    if (data && Array.isArray(data.items)) return data.items;
-    return [];
-}
 
 // ================================================================
 // GENERATE KEY
@@ -619,73 +370,7 @@ function generateKey() {
 }
 
 // ================================================================
-// LIMIT BADGE UPDATE
-// ================================================================
-function updateLimitBadge() {
-    const used = getSessionUsage();
-    const badge = document.getElementById('limitBadge');
-    const exhausted = document.getElementById('limitExhausted');
-    const createBtn = document.getElementById('createBtn');
-    
-    document.getElementById('usedCount').textContent = used;
-    
-    if (used >= MAX_KEYS_PER_SESSION) {
-        badge.classList.add('warn');
-        badge.innerHTML = `Limit Sesi: <strong>${used}</strong> / <strong>${MAX_KEYS_PER_SESSION}</strong> key (HABIS)`;
-        exhausted.classList.add('show');
-        createBtn.disabled = true;
-        
-        // Update next reset time text
-        const nextReset = getNextResetTime();
-        const hh = String(nextReset.getHours()).padStart(2, '0');
-        const mm = String(nextReset.getMinutes()).padStart(2, '0');
-        document.getElementById('nextResetTime').textContent = `${hh}:${mm}`;
-    } else {
-        badge.classList.remove('warn');
-        badge.innerHTML = `Limit Sesi: <strong>${used}</strong> / <strong>${MAX_KEYS_PER_SESSION}</strong> key`;
-        exhausted.classList.remove('show');
-        createBtn.disabled = false;
-    }
-}
-
-// ================================================================
-// RESET COUNTDOWN
-// ================================================================
-function updateResetCountdown() {
-    const el = document.getElementById('resetCountdown');
-    if (!el) return;
-    
-    const now = Date.now();
-    const nextReset = getNextResetTime();
-    const diff = nextReset.getTime() - now;
-    
-    if (diff <= 0) {
-        // Waktunya reset!
-        el.textContent = '00:00:00';
-        el.classList.add('urgent');
-        // Cek apakah limit benar-benar direset
-        setTimeout(() => {
-            updateLimitBadge();
-            updateResetCountdown();
-        }, 1000);
-        return;
-    }
-    
-    const hours = Math.floor(diff / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-    
-    el.textContent = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-    
-    if (diff <= 60000) { // < 1 menit
-        el.classList.add('urgent');
-    } else {
-        el.classList.remove('urgent');
-    }
-}
-
-// ================================================================
-// KEY HISTORY
+// HISTORY
 // ================================================================
 function getKeyHistory() {
     try {
@@ -704,6 +389,7 @@ function renderHistory() {
     const history = getKeyHistory();
     const box = document.getElementById('historyBox');
     const list = document.getElementById('historyList');
+    if (!box || !list) return;
     if (history.length === 0) { box.style.display = 'none'; return; }
     box.style.display = 'block';
     list.innerHTML = history.map(h => {
@@ -718,98 +404,158 @@ function renderHistory() {
 }
 
 // ================================================================
-// CREATE KEY
+// CREATE KEY — TANPA LIMIT
 // ================================================================
 async function createKey() {
     const btn = document.getElementById('createBtn');
     const errAlert = document.getElementById('errorAlert');
     const successAlert = document.getElementById('successAlert');
     
-    errAlert.classList.remove('show');
-    successAlert.classList.remove('show');
+    if (errAlert) errAlert.classList.remove('show');
+    if (successAlert) successAlert.classList.remove('show');
 
-    // Cek limit sesi
-    if (getSessionUsage() >= MAX_KEYS_PER_SESSION) {
-        const nextReset = getNextResetTime();
-        const hh = String(nextReset.getHours()).padStart(2, '0');
-        const mm = String(nextReset.getMinutes()).padStart(2, '0');
-        showError(`❌ Limit habis! Tunggu reset jam ${hh}:${mm}.`);
-        return;
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> MEMBUAT KEY...';
     }
 
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> MEMBUAT KEY...';
+    const keyValue = generateKey();
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + KEY_DURATION_MS);
 
+    const payload = {
+        key_value: keyValue,
+        created_by: "user",
+        created_at: now.toISOString(),
+        expires_at: expiresAt.toISOString(),
+        is_active: true,
+        note: "Auto-generated by user"
+    };
+
+    console.log('%c[CREATE] Payload:', 'color:#ffd700;', payload);
+
+    let savedToDB = false;
+    let savedId = null;
+    let lastError = '';
+
+    // ===== ENDPOINT UTAMA =====
     try {
-        const keyValue = generateKey();
-        const now = new Date();
-        const expiresAt = new Date(now.getTime() + KEY_DURATION_MS);
+        const res = await fetch(`${DB_BASE}/${COLLECTION}`, {
+            method: 'POST',
+            headers: {
+                'x-api-key': DB_API_KEY,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
 
-        const payload = {
-            key_value: keyValue,
-            created_by: "user",
-            created_at: now.toISOString(),
-            expires_at: expiresAt.toISOString(),
-            is_active: true,
-            note: "Auto-generated by user"
-        };
+        const rawText = await res.text();
+        let data;
+        try { data = JSON.parse(rawText); } catch { data = rawText; }
 
-        const attempts = [
-            { method: 'POST', path: `/${COLLECTION}` },
-            { method: 'POST', path: `/${COLLECTION}/create` },
-            { method: 'POST', path: `/${COLLECTION}/insert` }
+        console.log(`%c[CREATE] Response Status: ${res.status}`, 
+            res.status >= 200 && res.status < 300 ? 'color:#00ff88; font-weight:bold;' : 'color:#ff6666;');
+        console.log('[CREATE] Response Body:', data);
+
+        if (res.status >= 200 && res.status < 300) {
+            savedToDB = true;
+            if (data && typeof data === 'object' && data.id) {
+                savedId = data.id;
+            }
+            console.log('%c[CREATE] ✅ KEY SAVED!', 'color:#00ff88; font-weight:bold; font-size:14px;');
+        } else {
+            lastError = `Status ${res.status}`;
+        }
+    } catch (fetchErr) {
+        console.error('[CREATE] Fetch error:', fetchErr);
+        lastError = fetchErr.message;
+    }
+
+    // ===== ENDPOINT ALTERNATIF =====
+    if (!savedToDB) {
+        console.log('%c[CREATE] Trying alternative endpoints...', 'color:#ffaa00;');
+        
+        const altEndpoints = [
+            `/${COLLECTION}/create`,
+            `/${COLLECTION}/insert`
         ];
 
-        let success = false;
-        let lastRes = null;
-        for (const a of attempts) {
-            const res = await apiRequest(a.method, a.path, payload);
-            lastRes = res;
-            if (res.ok) {
-                success = true;
-                currentKeyId = res.data && res.data.id ? res.data.id : null;
-                break;
+        for (const altPath of altEndpoints) {
+            try {
+                const res = await fetch(`${DB_BASE}${altPath}`, {
+                    method: 'POST',
+                    headers: {
+                        'x-api-key': DB_API_KEY,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const rawText = await res.text();
+                let data;
+                try { data = JSON.parse(rawText); } catch { data = rawText; }
+
+                console.log(`[CREATE] Alt ${altPath} → ${res.status}`, data);
+
+                if (res.status >= 200 && res.status < 300) {
+                    savedToDB = true;
+                    if (data && typeof data === 'object' && data.id) {
+                        savedId = data.id;
+                    }
+                    console.log('%c[CREATE] ✅ SUCCESS via alt!', 'color:#00ff88;');
+                    break;
+                }
+            } catch (err) {
+                console.error(`[CREATE] Alt error ${altPath}:`, err);
             }
-            if (res.status !== 404 && res.status !== 405) break;
         }
+    }
 
-        if (!success) {
-            throw new Error(`Gagal simpan ke database (status ${lastRes.status})`);
-        }
-
-        // Success
+    // ===== HASIL =====
+    if (savedToDB) {
+        // ✅ SUKSES
         currentKey = keyValue;
+        currentKeyId = savedId;
         keyStartTime = Date.now();
-        incrementSessionUsage();
         addToHistory(keyValue);
         
-        document.getElementById('keyValue').textContent = keyValue;
-        document.getElementById('keyDisplay').style.display = 'block';
-        successAlert.textContent = '✅ Key berhasil dibuat! Copy sekarang sebelum expired.';
-        successAlert.classList.add('show');
+        const keyValueEl = document.getElementById('keyValue');
+        const keyDisplayEl = document.getElementById('keyDisplay');
+        if (keyValueEl) keyValueEl.textContent = keyValue;
+        if (keyDisplayEl) keyDisplayEl.style.display = 'block';
+        
+        if (successAlert) {
+            successAlert.innerHTML = '✅ <strong>Key berhasil dibuat!</strong> Copy sekarang sebelum expired.';
+            successAlert.classList.add('show');
+        }
         
         startTimer();
-        document.getElementById('keyDisplay').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+            if (keyDisplayEl) keyDisplayEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    } else {
+        showError('❌ Gagal simpan ke database' + (lastError ? ` (${lastError})` : ''));
+        console.error('%c[CREATE] ❌ FAILED', 'color:#ff4444; font-weight:bold;');
+    }
 
-    } catch (err) {
-        console.error(err);
-        showError('❌ ' + err.message);
-    } finally {
+    if (btn) {
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-magic"></i> BUAT KEY SEKARANG';
-        updateLimitBadge();
     }
 }
 
 function showError(msg) {
     const errAlert = document.getElementById('errorAlert');
+    if (!errAlert) return;
     errAlert.textContent = msg;
     errAlert.classList.add('show');
     setTimeout(() => errAlert.classList.remove('show'), 5000);
 }
 
 // ================================================================
-// TIMER KEY (3 menit)
+// TIMER KEY
 // ================================================================
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
@@ -832,32 +578,52 @@ function updateTimerDisplay() {
     const remaining = Math.max(0, KEY_DURATION_MS - elapsed);
     const mins = Math.floor(remaining / 60000);
     const secs = Math.floor((remaining % 60000) / 1000);
+    
     const timerValue = document.getElementById('timerValue');
-    timerValue.textContent = String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
+    const timerFill = document.getElementById('timerFill');
     
-    const fillPercent = (remaining / KEY_DURATION_MS) * 100;
-    document.getElementById('timerFill').style.width = fillPercent + '%';
+    if (timerValue) {
+        timerValue.textContent = String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
+        
+        if (remaining <= 30000) {
+            timerValue.classList.add('urgent');
+        } else {
+            timerValue.classList.remove('urgent');
+        }
+    }
     
-    if (remaining <= 30000) {
-        timerValue.classList.add('urgent');
-    } else {
-        timerValue.classList.remove('urgent');
+    if (timerFill) {
+        const fillPercent = (remaining / KEY_DURATION_MS) * 100;
+        timerFill.style.width = fillPercent + '%';
     }
 }
 
 async function expireKey() {
     if (currentKeyId) {
         try {
-            await apiRequest('PUT', `/${COLLECTION}/${currentKeyId}`, { is_active: false });
+            await fetch(`${DB_BASE}/${COLLECTION}/${currentKeyId}`, {
+                method: 'PUT',
+                headers: {
+                    'x-api-key': DB_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ is_active: false })
+            });
         } catch (e) {
             console.warn('Gagal mark expired:', e);
         }
     }
     
-    document.getElementById('timerValue').textContent = 'EXPIRED';
-    document.getElementById('timerValue').classList.add('urgent');
-    document.getElementById('timerFill').style.width = '0%';
-    document.getElementById('copyBtn').disabled = true;
+    const timerValue = document.getElementById('timerValue');
+    const timerFill = document.getElementById('timerFill');
+    const copyBtn = document.getElementById('copyBtn');
+    
+    if (timerValue) {
+        timerValue.textContent = 'EXPIRED';
+        timerValue.classList.add('urgent');
+    }
+    if (timerFill) timerFill.style.width = '0%';
+    if (copyBtn) copyBtn.disabled = true;
     
     showError('⏰ Key sudah expired. Buat key baru.');
 }
@@ -868,6 +634,8 @@ async function expireKey() {
 async function copyKey() {
     if (!currentKey) return;
     const btn = document.getElementById('copyBtn');
+    if (!btn) return;
+    
     try {
         await navigator.clipboard.writeText(currentKey);
         btn.innerHTML = '<i class="fas fa-check"></i> TERSALIN!';
@@ -886,9 +654,14 @@ async function copyKey() {
 
 function resetKey() {
     if (timerInterval) clearInterval(timerInterval);
-    document.getElementById('keyDisplay').style.display = 'none';
-    document.getElementById('copyBtn').disabled = false;
-    document.getElementById('timerValue').classList.remove('urgent');
+    const keyDisplay = document.getElementById('keyDisplay');
+    const copyBtn = document.getElementById('copyBtn');
+    const timerValue = document.getElementById('timerValue');
+    
+    if (keyDisplay) keyDisplay.style.display = 'none';
+    if (copyBtn) copyBtn.disabled = false;
+    if (timerValue) timerValue.classList.remove('urgent');
+    
     currentKey = null;
     currentKeyId = null;
 }
@@ -897,26 +670,9 @@ function resetKey() {
 // INIT
 // ================================================================
 window.addEventListener('DOMContentLoaded', () => {
-    updateLimitBadge();
     renderHistory();
-    updateResetCountdown();
-    
-    // Update countdown tiap detik
-    if (resetCountdownInterval) clearInterval(resetCountdownInterval);
-    resetCountdownInterval = setInterval(() => {
-        updateResetCountdown();
-        // Cek juga apakah sudah reset
-        const usage = getSessionUsage();
-        const btn = document.getElementById('createBtn');
-        if (usage < MAX_KEYS_PER_SESSION && btn.disabled) {
-            updateLimitBadge();
-        }
-    }, 1000);
-    
-    console.log('%c🔑 Create Key Page Loaded', 'color:#ffd700; font-weight:bold;');
-    console.log('%c⏰ Reset limit: jam 10:00 & 20:00', 'color:#ffd700;');
-    console.log('%c📊 Session ID:', 'color:#ffd700;', getCurrentSessionId());
-    console.log('%c📊 Current usage:', 'color:#ffd700;', getSessionUsage(), '/', MAX_KEYS_PER_SESSION);
+    console.log('%c🔑 Create Key Page Loaded', 'color:#ffd700; font-weight:bold; font-size:14px;');
+    console.log('%c♾️ TANPA LIMIT — Bebas bikin key sepuasnya', 'color:#00ff88;');
 });
 </script>
 
